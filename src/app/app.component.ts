@@ -1,4 +1,7 @@
+"use strict";
+
 import { Component, ViewChild, ElementRef } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-root",
@@ -26,6 +29,17 @@ export class AppComponent {
   title = "my";
   login: string;
   password: string;
+  user: void;
+  error: void;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http
+      .get("https://dog.ceo/api/breeds/image/random")
+      .subscribe(data => (this.users = data));
+    //    error => {this.error = error.message; console.log(error);}
+  }
 
   @ViewChild("elementP")
   elementParagraph: ElementRef;
@@ -36,5 +50,42 @@ export class AppComponent {
     console.log(this.elementParagraph.nativeElement.textContent);
   }
 
-  load() {}
+  load() {
+    let name = "Sergey";
+    let age = 23;
+
+    let user = {
+      name,
+      age,
+      giveName() {
+        return this.name;
+      }
+    };
+    console.log(user);
+    console.log(user.hasOwnProperty("age"));
+    let user2;
+    console.log((user2 = JSON.stringify(user)));
+    console.log(JSON.parse(user2));
+    let fugure = "tall";
+    let user3 = {
+      [fugure]: "short"
+    };
+    console.log(user3);
+    let user4;
+    console.log((user4 = Object.assign(Object.create({}), user, user3)));
+    console.log(user4.giveName());
+
+    class User {
+      constructor(name) {
+        this.name = name;
+      }
+      saiHi() {
+        console.log(this.name);
+      }
+    }
+
+    let user7 = new User("Yura");
+
+    console.log(user7.saiHi());
+  }
 }
