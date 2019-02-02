@@ -76,16 +76,37 @@ export class AppComponent {
     console.log(user4.giveName());
 
     class User {
-      constructor(name) {
+      constructor(name, lastname) {
         this.name = name;
+        this.lastname = lastname;
       }
-      saiHi() {
-        console.log(this.name);
+      static sayHi() {
+        return this.name;
+      }
+      get fullname() {
+        return `${this.name},  ${this.lastname}`;
+      }
+      set fullname(name) {
+        this.name = name;
       }
     }
 
-    let user7 = new User("Yura");
+    let user7 = new User("Yura", "Borodach");
 
-    console.log(user7.saiHi());
+    console.log(User.sayHi());
+
+    function add() {
+      let n = 1;
+      return function() {
+        return n++;
+      };
+    }
+    let next = {};
+    let next1 = next;
+    console.log(next == next1);
+
+    //console.dir(next());
+    //console.dir(next());
+    //console.dir(add()());
   }
 }
