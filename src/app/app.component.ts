@@ -101,12 +101,32 @@ export class AppComponent {
         return n++;
       };
     }
-    let next = {};
-    let next1 = next;
+
+    let next = add();
+    let next1 = add();
     console.log(next == next1);
 
-    //console.dir(next());
-    //console.dir(next());
-    //console.dir(add()());
+    console.dir(next());
+    console.dir(next1());
+    function sum(a) {
+      return function(b) {
+        return a + b;
+      };
+    }
+
+    console.log(sum(1)(2));
+
+    let map = new Map([
+      ["user1", "Yura"],
+      ["user2", "Sergei"],
+      ["user3", "Lelik"]
+    ]);
+    map.set(1, 2);
+    map.set(true, "sing");
+    console.log(map.get(1));
+    console.log(map.keys());
+    for (let el of map.values()) {
+      console.log();
+    }
   }
 }
