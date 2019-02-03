@@ -2,6 +2,7 @@
 
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { resolve } from "path";
 
 @Component({
   selector: "app-root",
@@ -126,7 +127,53 @@ export class AppComponent {
     console.log(map.get(1));
     console.log(map.keys());
     for (let el of map.values()) {
-      console.log();
+      console.log(el);
     }
+    map.forEach((elem, item, arr) => console.log(elem, "-", item));
+
+    let set = new Set();
+    set.add(1);
+    set.add(1);
+    set.add(2);
+    set.add(2);
+    console.log(set);
+
+    let promise = new Promise((resolve, reject) =>
+      setTimeout(() => resolve("ok1"), 1000)
+    );
+
+    let promise2 = new Promise((resolve, reject) =>
+      setTimeout(() => reject("ok2"), 1000)
+    );
+
+    Promise.race([promise, promise2])
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+      .finally(() => console.log("finally"));
+
+    function* generator() {
+      let result1 = yield "user1";
+      console.log("result1=", result1);
+      let result2 = yield "user2";
+      console.log("result2=", result2);
+      let result3 = yield "user3";
+      console.log("result3=", result3);
+    }
+
+    let gen = generator();
+    console.log(gen.next());
+    console.log(gen.next(1));
+    console.log(gen.next(2));
+    console.log(gen.next(3));
+
+    /*
+    promise
+      .then(resolve => {
+        console.log(resolve);
+        return "++";
+      })
+      .then(resolve => console.log(resolve))
+      .catch(reject => console.log(reject));
+*/
   }
 }
