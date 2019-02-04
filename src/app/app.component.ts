@@ -161,10 +161,46 @@ export class AppComponent {
     }
 
     let gen = generator();
-    console.log(gen.next());
     console.log(gen.next(1));
     console.log(gen.next(2));
     console.log(gen.next(3));
+    console.log(gen.next(4));
+
+    let p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("good");
+      }, 2000);
+    });
+    p.then(result => {
+      console.log(result);
+      return 7;
+    }).then(arg => console.log(arg));
+    p.catch(error => {
+      console.log("error-", error);
+      return 777;
+    });
+
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("good1");
+      }, 1000);
+    });
+    p.then(result => {
+      console.log(result);
+      return 8;
+    }).then(arg => console.log(arg));
+    p.catch(error => {
+      console.log("error-", error);
+      return 888;
+    });
+
+    Promise.all([p, p1]).then(result => {
+      console.log(result);
+    });
+
+    Promise.race([p, p1]).then(result => {
+      console.log(result);
+    });
 
     /*
     promise
