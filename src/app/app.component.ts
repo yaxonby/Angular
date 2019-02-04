@@ -202,6 +202,32 @@ export class AppComponent {
       console.log(result);
     });
 
+    function* generator7() {
+      yield 1;
+      yield 2;
+    }
+    let gene1 = generator7();
+
+    console.log(gene1.next());
+    console.log(gene1.next());
+    console.log(gene1.next());
+
+    function* gener777() {
+      let result = yield "4+4";
+      console.log("result=", result);
+    }
+
+    let gen777 = gener777();
+
+    console.log("value=", gen777.next().value);
+    console.log("next(8)=", gen777.next(8));
+
+
+    async add(x){
+    let a=await plus(x);
+    let b=await plus(x);
+    }
+
     /*
     promise
       .then(resolve => {
