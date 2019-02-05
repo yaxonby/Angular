@@ -8,6 +8,7 @@ import { resolve } from "path";
   selector: "app-root",
   // templateUrl: './app.component.html',
   template: `
+    <child>!!!!!!!!!!!!!!!</child>
     <div style="text-align:center">
       <article>
         <p>Singup</p>
@@ -39,6 +40,7 @@ export class AppComponent {
     this.http
       .get("https://dog.ceo/api/breeds/image/random")
       .subscribe(data => (this.users = data));
+    console.log("-----", this.user);
     //    error => {this.error = error.message; console.log(error);}
   }
 

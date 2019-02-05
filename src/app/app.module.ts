@@ -4,9 +4,10 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
+import { ChildComponent } from "./child.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ChildComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
