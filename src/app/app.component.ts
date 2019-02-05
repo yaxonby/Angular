@@ -238,7 +238,7 @@ export class AppComponent {
         setTimeout(() => {
           console.log(x);
           resolve(x);
-          throw new Error("uppps...");
+          //  throw new Error("uppps...");
         }, 1000);
       });
     }
@@ -250,6 +250,24 @@ export class AppComponent {
       .catch(error => {
         console.log(error);
       });
+
+    const url = "https://dog.ceo/api/breeds/list/all";
+
+    let promLoad = new Promise((resolve, reject) => {
+      let xml = new XMLHttpRequest();
+      xml.open("GET", url, true);
+      xml.send();
+      xml.onreadystatechange = () => {
+        console.log(xml.readyState);
+        if (xml.readyState == 4) resolve(xml);
+      };
+    });
+
+    promLoad.then(xml => {
+      console.log(xml.response);
+      console.log(JSON.parse(xml.response).message);
+    });
+
     /*
     promise
       .then(resolve => {
