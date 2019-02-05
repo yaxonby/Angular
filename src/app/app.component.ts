@@ -96,16 +96,16 @@ export class AppComponent {
 
     console.log(User.sayHi());
 
-    function add() {
+    function add6() {
       let n = 1;
       return function() {
         return n++;
       };
     }
 
-    let next = add();
-    let next1 = add();
-    console.log(next == next1);
+    let next = add6();
+    let next1 = add6();
+    console.log(next === next1);
 
     console.dir(next());
     console.dir(next1());
@@ -222,12 +222,34 @@ export class AppComponent {
     console.log("value=", gen777.next().value);
     console.log("next(8)=", gen777.next(8));
 
-
-    async add(x){
-    let a=await plus(x);
-    let b=await plus(x);
+    async function add(x) {
+      let a = await plus(x);
+      let b = await plus(x);
     }
 
+    async function addAfter(x) {
+      let a = await loadAs(x);
+      let b = await loadAs(a);
+      return b;
+    }
+
+    function loadAs(x) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(x);
+          resolve(x);
+          throw new Error("uppps...");
+        }, 1000);
+      });
+    }
+
+    addAfter(5)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     /*
     promise
       .then(resolve => {
