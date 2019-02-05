@@ -251,7 +251,7 @@ export class AppComponent {
         console.log(error);
       });
 
-    const url = "https://dog.ceo/api/breeds/list/all";
+    const url = "https://dog.ceo/api/breeds/image/random";
 
     let promLoad = new Promise((resolve, reject) => {
       let xml = new XMLHttpRequest();
@@ -262,10 +262,16 @@ export class AppComponent {
         if (xml.readyState == 4) resolve(xml);
       };
     });
+    let srcImg;
+    const image = new Image();
 
     promLoad.then(xml => {
       console.log(xml.response);
-      console.log(JSON.parse(xml.response).message);
+      console.log(xml.getAllResponseHeaders());
+
+      console.log((srcImg = JSON.parse(xml.response).message));
+      image.src = srcImg;
+      document.body.appendChild(image);
     });
 
     /*
